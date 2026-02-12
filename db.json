@@ -1,0 +1,48 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Design task management UI",
+      "description": "Create wireframes and basic layout for the task management dashboard.",
+      "priority": "high",
+      "dueDate": "2026-02-20",
+      "createdAt": "2026-02-10",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "title": "Set up REST API endpoints",
+      "description": "Configure CRUD endpoints using json-server for tasks resource.",
+      "priority": "medium",
+      "dueDate": "2026-02-22",
+      "createdAt": "2026-02-11",
+      "completed": false
+    },
+    {
+      "id": 3,
+      "title": "Implement HTTP interceptor",
+      "description": "Add an Angular HTTP interceptor to attach authentication tokens to requests.",
+      "priority": "high",
+      "dueDate": "2026-02-18",
+      "createdAt": "2026-02-09",
+      "completed": true
+    },
+    {
+      "id": 4,
+      "title": "Write unit tests for task service",
+      "description": "Cover all service methods using Jasmine and Karma.",
+      "priority": "medium",
+      "dueDate": "2026-02-25",
+      "createdAt": "2026-02-12",
+      "completed": false
+    },
+    {
+      "id": 5,
+      "title": "Refactor task state management",
+      "description": "Improve task state handling using BehaviorSubject and Observables.",
+      "priority": "low",
+      "dueDate": "2026-02-28",
+      "createdAt": "2026-02-12"
+    }
+  ]
+}
