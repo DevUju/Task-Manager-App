@@ -1,1 +1,11 @@
-<p>task-form works!</p>
+<form (ngSubmit)="createTask()">
+    <input [(ngModel)]="newTask.title" name="title" placeholder="Task Title" required />
+    <textarea [(ngModel)]="newTask.description" name="description" placeholder="Description"></textarea>
+    <select [(ngModel)]="newTask.priority" name="priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+    </select>
+    <input [(ngModel)]="newTask.dueDate" name="dueDate" type="date" required />
+    <button type="submit">Add Task</button>
+</form>

@@ -25,7 +25,7 @@
       "priority": "high",
       "dueDate": "2026-02-18",
       "createdAt": "2026-02-09",
-      "completed": true
+      "completed": false
     },
     {
       "id": 4,
@@ -42,7 +42,62 @@
       "description": "Improve task state handling using BehaviorSubject and Observables.",
       "priority": "low",
       "dueDate": "2026-02-28",
-      "createdAt": "2026-02-12"
+      "createdAt": "2026-02-12",
+      "completed": false
+    },
+    {
+      "id": 1771061038024,
+      "title": "Implement JWT authentication for the login component.",
+      "description": "Let this implemetation be verified across all endpoints needing the login component.",
+      "priority": "medium",
+      "dueDate": "2026-02-14T09:22:29.755Z",
+      "createdAt": "2026-02-14T09:22:29.755Z",
+      "completed": false
+    },
+    {
+      "id": 1771061275143,
+      "title": "Make your Hair",
+      "description": "This hair style is for Ann Itodo's wedding",
+      "priority": "high",
+      "dueDate": "2026-02-14T09:27:34.022Z",
+      "createdAt": "2026-02-14T09:27:34.022Z",
+      "completed": false
+    },
+    {
+      "id": 1771061510668,
+      "title": "Visit the Blessed Sacrament",
+      "description": "Pray for Nigeria",
+      "priority": "high",
+      "dueDate": "2026-02-14T09:31:27.078Z",
+      "createdAt": "2026-02-14T09:31:27.078Z",
+      "completed": false
+    },
+    {
+      "id": 1771061779344,
+      "title": "Wash your clothes",
+      "description": "You are running out of clothes",
+      "priority": "high",
+      "dueDate": "2026-02-14T09:35:56.690Z",
+      "createdAt": "2026-02-14T09:35:56.690Z",
+      "completed": false
+    },
+    {
+      "id": 1771062303280,
+      "title": "Study for IELTS",
+      "description": "For Ireland",
+      "priority": "low",
+      "dueDate": "2026-02-14T09:44:46.668Z",
+      "createdAt": "2026-02-14T09:44:46.668Z",
+      "completed": false
+    },
+    {
+      "id": 1771063191498,
+      "title": "Go for dancing class",
+      "description": "Make sure you learn well",
+      "priority": "medium",
+      "dueDate": "2026-02-14T09:59:28.880Z",
+      "createdAt": "2026-02-14T09:59:28.880Z",
+      "completed": false
     }
   ]
 }

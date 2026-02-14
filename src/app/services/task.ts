@@ -4,15 +4,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Task } from '../shared/models/task';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class TaskService {
-  private apiUrl = 'http://localhost:3000/tasks'
+  private apiUrl = 'http://localhost:3000/tasks';
   private tasksSubject = new BehaviorSubject<Task[]>([]);
   public tasks$ = this.tasksSubject.asObservable();
 
   constructor(private http: HttpClient) { }
+
 
   getTasks(): void {
     this.http.get<Task[]>(this.apiUrl)
@@ -20,8 +19,8 @@ export class TaskService {
         map(tasks => tasks.map(task => ({
           ...task,
           completed: !!task.completed,
-          createdAt: new Date().toISOString(),
-          dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(), // Example due date
+          createdAt: task.createdAt || new Date().toISOString(),
+          dueDate: task.dueDate || new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
         })))
       )
       .subscribe(tasks => this.tasksSubject.next(tasks));
@@ -33,18 +32,12 @@ export class TaskService {
     );
   }
 
-  addTask(task: Task): void {
-    const currentTasks = this.tasksSubject.value;
-    this.tasksSubject.next([...currentTasks, task]);
-  }
 
-  updateTask(id: number, updates: Partial<Task>): void {
-    this.http.patch<Task>(`${this.apiUrl}/${id}`, updates)
+  addTask(task: Task): void {
+    this.http.post<Task>(this.apiUrl, task)
       .pipe(
-        tap(updatedTask => {
-          const updatedTasks = this.tasksSubject.value.map(task =>
-            task.id === id ? updatedTask : task
-          );
+        tap(savedTask => {
+          const updatedTasks = [...this.tasksSubject.value, savedTask];
           this.tasksSubject.next(updatedTasks);
         })
       )
@@ -52,9 +45,13 @@ export class TaskService {
   }
 
   markTaskCompleted(id: number): void {
-    const updatedTasks = this.tasksSubject.value.map(task =>
-      task.id === id ? { ...task, completed: true } : task
-    );
-    this.tasksSubject.next(updatedTasks);
+    this.http.patch<Task>(`${this.apiUrl}/${id}`, { completed: true })
+      .pipe(
+        tap(() => {
+          const updatedTasks = this.tasksSubject.value.filter(task => task.id !== id);
+          this.tasksSubject.next(updatedTasks);
+        })
+      )
+      .subscribe();
   }
 }

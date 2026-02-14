@@ -1,8 +1,10 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../shared/models/task';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task-form',
+  imports: [FormsModule],
   templateUrl: './task-form.html',
   styleUrls: ['./task-form.css']
 })
