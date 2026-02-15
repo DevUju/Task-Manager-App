@@ -14,6 +14,7 @@ import { Task } from '../../shared/models/task';
 })
 export class TaskList implements OnInit {
   tasks: Task[] = [];
+  completingTasks: Set<number> = new Set();
   newTask: Task = {
     id: Date.now(),
     title: '',
@@ -29,17 +30,39 @@ export class TaskList implements OnInit {
   ngOnInit(): void {
     this.taskService.getTasks();
     this.taskService.tasks$.subscribe(tasks => {
-      this.tasks = tasks.filter(t => !t.completed);
+      this.tasks = tasks;
     });
   }
 
   addTask(): void {
-    this.taskService.addTask({ ...this.newTask, id: Date.now() });
+    const uniqueId = Date.now().toString();
+    
+    const taskToAdd = {
+      ...this.newTask, 
+      id: uniqueId,
+      dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
+    };
+    
+    this.taskService.addTask(taskToAdd);
+    
     this.newTask.title = '';
     this.newTask.description = '';
+    
+    setTimeout(() => {
+      this.taskService.getTasks();
+    }, 500);
   }
 
   markCompleted(id: number): void {
-  this.taskService.markTaskCompleted(id);
-}
+    if (this.completingTasks.has(id)) {
+      return;
+    }
+    this.completingTasks.add(id);    
+    this.taskService.markTaskCompleted(id);
+    
+    setTimeout(() => {
+      this.completingTasks.delete(id);
+      this.taskService.getTasks();
+    }, 1000);
+  }
 }

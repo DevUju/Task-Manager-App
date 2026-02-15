@@ -65,6 +65,22 @@ li span {
     color: #333;
 }
 
+li.completed-task {
+    background-color: #e8f5e8;
+    border-color: #28a745;
+    opacity: 0.8;
+}
+
+.completed-badge {
+    background-color: #28a745;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
 li span.completed {
     text-decoration: line-through;
     color: #888;

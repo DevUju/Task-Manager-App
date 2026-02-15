@@ -18,6 +18,7 @@ export class TaskService {
       .pipe(
         map(tasks => tasks.map(task => ({
           ...task,
+          id: String(task.id),
           completed: !!task.completed,
           createdAt: task.createdAt || new Date().toISOString(),
           dueDate: task.dueDate || new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString()
@@ -28,30 +29,72 @@ export class TaskService {
 
   getTaskById(id: number): Observable<Task | undefined> {
     return this.tasks$.pipe(
-      map(tasks => tasks.find(task => task.id === id))
+      map(tasks => {
+        const foundTask = tasks.find(task => task.id.toString() === id.toString());
+        return foundTask;
+      })
     );
   }
 
 
   addTask(task: Task): void {
-    this.http.post<Task>(this.apiUrl, task)
-      .pipe(
-        tap(savedTask => {
-          const updatedTasks = [...this.tasksSubject.value, savedTask];
-          this.tasksSubject.next(updatedTasks);
-        })
-      )
-      .subscribe();
+    const stringIdTask: Task = { ...task, id: String(task.id) };
+    const updatedTasks = [...this.tasksSubject.value, stringIdTask];
+    this.tasksSubject.next(updatedTasks);
+    
+    this.http.post<Task>(this.apiUrl, stringIdTask).subscribe({
+      next: (savedTask) => {
+        const normalizedSavedTask = { ...savedTask, id: String(savedTask.id) };
+        const finalTasks = this.tasksSubject.value.map(t => 
+          t.id.toString() === stringIdTask.id.toString() ? normalizedSavedTask : t
+        );
+        this.tasksSubject.next(finalTasks);
+        this.getTasks();
+      },
+      error: (error) => {
+        const revertedTasks = this.tasksSubject.value.filter(t => t.id.toString() !== stringIdTask.id.toString());
+        this.tasksSubject.next(revertedTasks);
+      }
+    });
   }
 
   markTaskCompleted(id: number): void {
-    this.http.patch<Task>(`${this.apiUrl}/${id}`, { completed: true })
-      .pipe(
-        tap(() => {
-          const updatedTasks = this.tasksSubject.value.filter(task => task.id !== id);
-          this.tasksSubject.next(updatedTasks);
-        })
-      )
-      .subscribe();
+    
+    const currentTasks = this.tasksSubject.value;
+    const updatedTasks = currentTasks.map(task => 
+      task.id.toString() === id.toString() ? { ...task, completed: true } : task
+    );
+    this.tasksSubject.next(updatedTasks);
+    
+    const task = currentTasks.find(t => t.id.toString() === id.toString());
+    if (task) {
+      this.http.patch<Task>(`${this.apiUrl}/${String(task.id)}`, { completed: true })
+        .subscribe({
+          next: (response) => {
+            this.getTasks();
+          },
+          error: (patchError) => {
+          }
+        });
+    }
+  }
+
+  updateTask(id: number, updates: Partial<Task>): void {
+    const task = this.tasksSubject.value.find(t => t.id.toString() === id.toString());
+    if (task) {
+      const updatedTask = { ...task, ...updates };
+      const updatedTasks = this.tasksSubject.value.map(t => 
+        t.id.toString() === id.toString() ? updatedTask : t
+      );
+      this.tasksSubject.next(updatedTasks);
+      
+      this.http.patch<Task>(`${this.apiUrl}/${String(task.id)}`, updates)
+        .subscribe({
+          next: (response) => {
+          },
+          error: (patchError) => {
+          }
+        });
+    }
   }
 }

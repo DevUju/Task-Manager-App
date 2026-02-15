@@ -1,11 +1,50 @@
-<div *ngIf="task$ | async as task; else loading">
-    <h2>{{ task.title }}</h2>
-    <p>{{ task.description }}</p>
-    <p>Priority: {{ task.priority }}</p>
-    <p>Due: {{ task.dueDate | date }}</p>
-    <p>Created: {{ task.createdAt | date }}</p>
-    <p>Status: {{ task.completed ? 'Completed' : 'Pending' }}</p>
-</div>
-<ng-template #loading>
+@if (task(); as currentTask) {
+    <div class="task-detail-container">
+        <button (click)="goBack()" class="back-button">← Back to Tasks</button>
+        
+        @if (!isEditing) {
+            <div>
+                <h2>{{ currentTask.title }}</h2>
+                <p>{{ currentTask.description }}</p>
+                <p>Priority: {{ currentTask.priority }}</p>
+                <p>Due: {{ currentTask.dueDate | date }}</p>
+                <p>Created: {{ currentTask.createdAt | date }}</p>
+                <p>Status: {{ currentTask.completed ? 'Completed' : 'Pending' }}</p>
+                <button (click)="toggleEdit()">Edit Task</button>
+            </div>
+        } @else {
+            <div>
+                <h2>Edit Task</h2>
+                <form (ngSubmit)="saveTask()" class="edit-form">
+                    <div>
+                        <label for="title">Title:</label>
+                        <input [(ngModel)]="editedTask.title" name="title" id="title" required>
+                    </div>
+                    <div>
+                        <label for="description">Description:</label>
+                        <textarea [(ngModel)]="editedTask.description" name="description" id="description"></textarea>
+                    </div>
+                    <div>
+                        <label for="priority">Priority:</label>
+                        <select [(ngModel)]="editedTask.priority" name="priority" id="priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="completed">Status:</label>
+                        <select [(ngModel)]="editedTask.completed" name="completed" id="completed">
+                            <option [ngValue]="false">Pending</option>
+                            <option [ngValue]="true">Completed</option>
+                        </select>
+                    </div>
+                    <button type="submit">Save</button>
+                    <button type="button" (click)="cancelEdit()">Cancel</button>
+                </form>
+            </div>
+        }
+    </div>
+} @else {
     <p>Loading task details...</p>
-</ng-template>
+}

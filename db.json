@@ -1,16 +1,16 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "title": "Design task management UI",
+      "id": "1",
+      "title": "Build and Design task management UI",
       "description": "Create wireframes and basic layout for the task management dashboard.",
       "priority": "high",
       "dueDate": "2026-02-20",
       "createdAt": "2026-02-10",
-      "completed": false
+      "completed": true
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Set up REST API endpoints",
       "description": "Configure CRUD endpoints using json-server for tasks resource.",
       "priority": "medium",
@@ -19,7 +19,7 @@
       "completed": false
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Implement HTTP interceptor",
       "description": "Add an Angular HTTP interceptor to attach authentication tokens to requests.",
       "priority": "high",
@@ -28,7 +28,7 @@
       "completed": false
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Write unit tests for task service",
       "description": "Cover all service methods using Jasmine and Karma.",
       "priority": "medium",
@@ -37,7 +37,7 @@
       "completed": false
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Refactor task state management",
       "description": "Improve task state handling using BehaviorSubject and Observables.",
       "priority": "low",
@@ -46,7 +46,7 @@
       "completed": false
     },
     {
-      "id": 1771061038024,
+      "id": "1771061038024",
       "title": "Implement JWT authentication for the login component.",
       "description": "Let this implemetation be verified across all endpoints needing the login component.",
       "priority": "medium",
@@ -55,7 +55,7 @@
       "completed": false
     },
     {
-      "id": 1771061275143,
+      "id": "1771061275143",
       "title": "Make your Hair",
       "description": "This hair style is for Ann Itodo's wedding",
       "priority": "high",
@@ -64,7 +64,7 @@
       "completed": false
     },
     {
-      "id": 1771061510668,
+      "id": "1771061510668",
       "title": "Visit the Blessed Sacrament",
       "description": "Pray for Nigeria",
       "priority": "high",
@@ -73,16 +73,16 @@
       "completed": false
     },
     {
-      "id": 1771061779344,
+      "id": "1771061779344",
       "title": "Wash your clothes",
       "description": "You are running out of clothes",
       "priority": "high",
       "dueDate": "2026-02-14T09:35:56.690Z",
       "createdAt": "2026-02-14T09:35:56.690Z",
-      "completed": false
+      "completed": true
     },
     {
-      "id": 1771062303280,
+      "id": "1771062303280",
       "title": "Study for IELTS",
       "description": "For Ireland",
       "priority": "low",
@@ -91,12 +91,57 @@
       "completed": false
     },
     {
-      "id": 1771063191498,
+      "id": "1771063191498",
       "title": "Go for dancing class",
       "description": "Make sure you learn well",
       "priority": "medium",
       "dueDate": "2026-02-14T09:59:28.880Z",
       "createdAt": "2026-02-14T09:59:28.880Z",
+      "completed": true
+    },
+    {
+      "id": "1771072872979",
+      "title": "Bulid a Food Store",
+      "description": "This store will be an online restaurant for food order and delivery.",
+      "priority": "high",
+      "dueDate": "2026-02-21T12:41:12.979Z",
+      "createdAt": "2026-02-14T12:40:12.204Z",
+      "completed": true
+    },
+    {
+      "id": "6248",
+      "title": "Study the Scriptures",
+      "description": "James 4 vs 7",
+      "priority": "medium",
+      "dueDate": "2026-02-21T13:41:25.429Z",
+      "createdAt": "2026-02-14T13:41:04.320Z",
+      "completed": true
+    },
+    {
+      "id": "6355",
+      "title": "Stay Happy",
+      "description": "By Praying to God",
+      "priority": "high",
+      "dueDate": "2026-02-21T13:56:38.395Z",
+      "createdAt": "2026-02-14T13:56:15.418Z",
+      "completed": true
+    },
+    {
+      "id": "1705",
+      "title": "Happy",
+      "description": "Pray",
+      "priority": "high",
+      "dueDate": "2026-02-21T13:57:36.522Z",
+      "createdAt": "2026-02-14T13:57:04.199Z",
+      "completed": false
+    },
+    {
+      "id": "1771175904084",
+      "title": "Play the Violin",
+      "description": "Practice Handel Messiah and Mozart",
+      "priority": "medium",
+      "dueDate": "2026-02-22T17:18:24.084Z",
+      "createdAt": "2026-02-15T17:17:57.811Z",
       "completed": false
     }
   ]
